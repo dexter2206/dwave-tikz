@@ -1,6 +1,9 @@
 import dwave_networkx as dnx
 
-from .render import render
+from ._generate import generate_tikz_picture
+
+
+COMMAND_NAME = "pegasus"
 
 
 def _classify_coupler(first, second):
@@ -12,25 +15,31 @@ def _classify_coupler(first, second):
         return "internal"
 
 
-def generate_pegasus_picture(args):
-    pegasus = dnx.pegasus_graph(args.n, coordinates=True)
-    coordinates = dnx.pegasus_coordinates(args.n)
-    positions = dnx.pegasus_layout(pegasus, crosses=args.cross)
-    linear_positions = {
-        coordinates.pegasus_to_linear(node): tuple(30*position) for node, position in positions.items()
-    }
-
-    picture = render(
-        "pegasus.jinja2",
-        nodes=linear_positions,
-        edges=[
-            (
-                coordinates.pegasus_to_linear(n1),
-                coordinates.pegasus_to_linear(n2),
-                _classify_coupler(n1, n2)
-            )
-            for n1, n2 in pegasus.edges
-        ]
+def add_args(parser):
+    parser.add_argument("n", type=int, help="Size of the Pegasus graph")
+    parser.add_argument(
+        "--cross",
+        action="store_true",
+        help=(
+            "If provided, Chimera unit cells will be presented in cross layout, "
+            "as opposed to the default L-layout"
+        )
     )
 
-    args.output.write(picture)
+
+def fill_dynamic_defaults(args):
+    if args.scale is None:
+        args.scale = 30.0
+
+
+def generate(args):
+    picture_source = generate_tikz_picture(
+        graph=(graph := dnx.pegasus_graph(args.n, coordinates=True)),
+        linearize_coord=dnx.pegasus_coordinates(args.n).pegasus_to_linear,
+        layout=dnx.pegasus_layout(graph, crosses=args.cross, scale=args.scale),
+        classify_coupler=_classify_coupler,
+        template_name="pegasus.jinja2",
+        with_labels=args.with_labels
+    )
+
+    args.output.write(picture_source)

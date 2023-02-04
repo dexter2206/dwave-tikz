@@ -1,1 +1,7 @@
 .idea
+build
+dwave_tikz.egg-info
+*.pdf
+*.aux
+*.tex
+*.gz

@@ -1,16 +1,26 @@
 from argparse import ArgumentParser, FileType
 import subprocess
 
-from .chimera import generate_chimera_picture
-from .pegasus import generate_pegasus_picture
-from .zephyr import generate_zephyr_picture
+from . import chimera, pegasus, zephyr
 
 
-def main():
+COMMANDS = [chimera, pegasus, zephyr]
+
+
+def main(args=None):
     parser = ArgumentParser()
 
     parent_parser = ArgumentParser(add_help=False)
     parent_parser.add_argument("--output", type=FileType("w"), default="-")
+    parent_parser.add_argument(
+        "--scale",
+        type=float,
+        help=(
+            "Scale of the picture (see D-Wave Networkx docs for precise meaning). By default, "
+            "it is set to 7.0 for Zephyr and 30.0 for Pegasus and Chimera, which seems to look "
+            "reasonably well."
+        )
+    )
     parent_parser.add_argument(
         "--compile",
         action="store_true",
@@ -20,52 +30,31 @@ def main():
             "specified, and latexmk to be installed"
         )
     )
+    parent_parser.add_argument(
+        "--with-labels",
+        action="store_true",
+        default=False,
+        dest="with_labels",
+        help=(
+            "Output labels (number) of nodes. This will probably require you do do sme extensive "
+            "work when adjusting styles in tikz."
+        )
+    )
     subcommands = parser.add_subparsers(title="topology", required=True)
 
-    chimera = subcommands.add_parser("chimera", parents=[parent_parser])
-    chimera.add_argument("n", type=int, help="The number of rows in the Chimera graph")
-    chimera.add_argument(
-        "-m",
-        type=int,
-        help=(
-            "The number of columns in the Chimera graph. "
-            "If not provided, defaults to the number of rows."
+    for command in COMMANDS:
+        cmd_parser = subcommands.add_parser(name=command.COMMAND_NAME, parents=[parent_parser])
+        command.add_args(cmd_parser)
+        cmd_parser.set_defaults(
+            fill_dynamic_defaults=command.fill_dynamic_defaults,
+            generate=command.generate
         )
-    )
-    chimera.add_argument(
-        "-t",
-        type=int,
-        help=(
-            "Shore size of the Chimera unit cell. "
-            "If not provided, the default shore size of 4 will be used."
-        )
-    )
 
-    pegasus = subcommands.add_parser("pegasus", parents=[parent_parser])
-    pegasus.add_argument("n", type=int, help="Size of the Pegasus graph")
-    pegasus.add_argument(
-        "--cross",
-        action="store_true",
-        help=(
-            "If provided, Chimera unit cells will be presented in cross layout, "
-            "as opposed to the default L-layout"
-        )
-    )
-    zephyr = subcommands.add_parser("zephyr", parents=[parent_parser])
-    zephyr.add_argument("n", type=int, help="Size of the Zephyr graph")
+    args = parser.parse_args(args)
 
-    chimera.set_defaults(generate=generate_chimera_picture)
-    pegasus.set_defaults(generate=generate_pegasus_picture)
-    zephyr.set_defaults(generate=generate_zephyr_picture)
-
-    args = parser.parse_args()
+    args.fill_dynamic_defaults(args)
     args.generate(args)
 
     if args.compile:
         args.output.close()
-        subprocess.run(["latexmk", "-pdf", args.output.name])
-
-
-if __name__ == '__main__':
-    main()
-
+        subprocess.run(["latexmk", "-cd", "-pdf", args.output.name])

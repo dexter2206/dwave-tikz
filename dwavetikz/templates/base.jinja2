@@ -7,17 +7,22 @@
         scale=1,
         coupler/.style={draw},
         qubit/.style={circle, thick, font={\scriptsize}, fill=White,draw=darkgray,minimum size=7mm, inner sep=0.5mm},
+        hidden/.style={opacity=0.0},
         {% block extrastyles %}
         {%  endblock %}
     ]
 
     {% for node, position in nodes.items() -%}
-        \node[qubit] ({{ node }}) at {{ position }} { {{ node }} };
+        \node[qubit, hidden] ({{ node }}) at {{ position }} { {% if with_labels -%}{{ node }}{%- endif %} };
     {% endfor -%}
 
     {% for n1, n2, type in edges -%}
-        \path[coupler,{{type}}] ({{ n1 }}) -- ({{ n2 }});
-    {%  endfor -%}
+        \path[coupler, {{type}}] ({{ n1 }}) -- ({{ n2 }});
+    {% endfor -%}
+
+    {% for node, position in nodes.items() -%}
+        \node[qubit] ({{ node }}-front) at {{ position }} { {% if with_labels -%}{{ node }}{%- endif %} };
+    {% endfor -%}
 
     \end{tikzpicture}
 
