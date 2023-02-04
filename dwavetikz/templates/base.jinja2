@@ -1,0 +1,24 @@
+\documentclass[dvipsnames]{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+    \begin{tikzpicture}[
+        scale=1,
+        coupler/.style={draw},
+        qubit/.style={circle, thick, font={\scriptsize}, fill=White,draw=darkgray,minimum size=7mm, inner sep=0.5mm},
+        {% block extrastyles %}
+        {%  endblock %}
+    ]
+
+    {% for node, position in nodes.items() -%}
+        \node[qubit] ({{ node }}) at {{ position }} { {{ node }} };
+    {% endfor -%}
+
+    {% for n1, n2, type in edges -%}
+        \path[coupler,{{type}}] ({{ n1 }}) -- ({{ n2 }});
+    {%  endfor -%}
+
+    \end{tikzpicture}
+
+\end{document}
