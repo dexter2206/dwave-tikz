@@ -104,3 +104,37 @@ The styles were modified as follows (relevant part of `chimera3.tex`):
 ```
 
 ![chimera](pictures/chimera3.svg)
+
+**Example 4**: Chimera with 2 rows, 3 columns and nonstandard shore size of 8 (unit cells of 
+such Chimera are ports of the Zephyr topology). It also uses larger scaling of coordinates to 
+spread out nodes further away from each other (otherwise the nodes would overlap).
+
+```shell
+dwavetikz chimera 2 -n 3 -t 8 --output chimera4.tex --scale 40 --compile
+```
+
+![chimera](pictures/chimera4.svg)
+
+**Example 5**: The P3 Pegasus using the default L-layout for Chimera unit cells.
+
+```shell
+dwavetikz pegasus 3 --output pegasus.tex
+```
+
+![chimera](pictures/pegasus.svg)
+
+**Example 6**: The P3 Pegasus using the cross layout for Chimera unit cells.
+
+```shell
+dwavetikz pegasus 3 --cross --output pegasus2.tex
+```
+
+![chimera](pictures/pegasus2.svg)
+
+**Example 7**: The Z3 Zephyr graph.
+
+```shell
+dwavetikz zephyr 3 --cross --output zephyr.tex
+```
+
+![chimera](pictures/zephyr.svg)
