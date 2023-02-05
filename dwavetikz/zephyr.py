@@ -17,7 +17,7 @@ def _classify_coupler(first, second):
 
 def fill_dynamic_defaults(args):
     if args.scale is None:
-        args.scale = 7.0
+        args.scale = 10
 
 
 def add_args(parser):

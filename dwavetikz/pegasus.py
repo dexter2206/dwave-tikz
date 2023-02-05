@@ -29,7 +29,7 @@ def add_args(parser):
 
 def fill_dynamic_defaults(args):
     if args.scale is None:
-        args.scale = 30.0
+        args.scale = 50.0
 
 
 def generate(args):
