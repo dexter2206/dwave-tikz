@@ -43,7 +43,7 @@ def fill_dynamic_defaults(args):
 def generate(args):
     picture_source = generate_tikz_picture(
         graph=(graph := dnx.chimera_graph(args.m, args.n, args.t, coordinates=True)),
-        linearize_coord=dnx.chimera_coordinates(args.n, args.m, args.t).chimera_to_linear,
+        linearize_coord=dnx.chimera_coordinates(args.m, args.n, args.t).chimera_to_linear,
         layout=dnx.chimera_layout(graph, scale=args.scale),
         classify_coupler=_classify_coupler,
         template_name="chimera.jinja2",
