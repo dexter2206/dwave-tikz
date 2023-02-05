@@ -5,3 +5,6 @@ dwave_tikz.egg-info
 *.aux
 *.tex
 *.gz
+*.log
+*.fls
+*.fdb_latexmk
