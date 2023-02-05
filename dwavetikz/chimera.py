@@ -46,7 +46,7 @@ def generate(args):
         linearize_coord=dnx.chimera_coordinates(args.n, args.m, args.t).chimera_to_linear,
         layout=dnx.chimera_layout(graph, scale=args.scale),
         classify_coupler=_classify_coupler,
-        template_name="pegasus.jinja2",
+        template_name="chimera.jinja2",
         with_labels=args.with_labels
     )
 

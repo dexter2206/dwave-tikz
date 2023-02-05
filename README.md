@@ -72,3 +72,35 @@ dwavetikz chimera 2 --output chimera.tex
 ```
 
 ![chimera](pictures/chimera.svg)
+
+**Example 2**: the same Chimera, but with labels.
+
+```shell
+dwavetikz chimera 2 --output chimera2.tex --with-labels
+```
+
+![chimera](pictures/chimera2.svg)
+
+
+**Example 3**: the same Chimera, with labels, and after changing styles.
+
+```shell
+dwavetikz chimera 2 --output chimera3.tex --with-labels
+```
+
+The styles were modified as follows (relevant part of `chimera3.tex`):
+
+```latex
+\begin{tikzpicture}[
+        scale=1,
+        coupler/.style={draw},
+        qubit/.style={
+            circle, line width=2pt, font={\large \bfseries}, fill=White,draw=darkgray,minimum size=7mm, inner sep=0.5mm
+        },
+        hidden/.style={opacity=0.0},
+        internal/.style={color=RoyalBlue, ultra thick, dashed},
+        external/.style={color=Tan, ultra thick},
+    ]
+```
+
+![chimera](pictures/chimera3.svg)
