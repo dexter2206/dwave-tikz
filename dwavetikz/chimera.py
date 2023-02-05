@@ -37,7 +37,7 @@ def fill_dynamic_defaults(args):
     if args.n is None:
         args.n = args.m
     if args.scale is None:
-        args.scale = 30.0
+        args.scale = 20.0
 
 
 def generate(args):
