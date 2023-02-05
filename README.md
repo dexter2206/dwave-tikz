@@ -121,7 +121,7 @@ dwavetikz chimera 2 -n 3 -t 8 --output chimera4.tex --scale 40 --compile
 dwavetikz pegasus 3 --output pegasus.tex
 ```
 
-![chimera](pictures/pegasus.svg)
+![pegasus](pictures/pegasus.svg)
 
 **Example 6**: The P3 Pegasus using the cross layout for Chimera unit cells.
 
@@ -129,7 +129,7 @@ dwavetikz pegasus 3 --output pegasus.tex
 dwavetikz pegasus 3 --cross --output pegasus2.tex
 ```
 
-![chimera](pictures/pegasus2.svg)
+![pegasus](pictures/pegasus2.svg)
 
 **Example 7**: The Z3 Zephyr graph.
 
@@ -137,4 +137,4 @@ dwavetikz pegasus 3 --cross --output pegasus2.tex
 dwavetikz zephyr 3 --cross --output zephyr.tex
 ```
 
-![chimera](pictures/zephyr.svg)
+![zephyr](pictures/zephyr.svg)
