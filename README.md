@@ -65,6 +65,10 @@ compile the output .tex file. Obviously, this only works in conjunction with
 
 ### Examples
 
+> **Warning**
+> If you are using dark Github theme, the SVG pictures presented in this section may look 
+> slightly unreadable, because they have transparent backgrounds.
+
 **Example 1**: simple C2 Chimera, output to chimera.tex
 
 ```shell
