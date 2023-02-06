@@ -75,7 +75,7 @@ compile the output .tex file. Obviously, this only works in conjunction with
 dwavetikz chimera 2 --output chimera.tex
 ```
 
-![chimera](pictures/chimera.svg)
+![chimera](https://github.com/dexter2206/dwave-tikz/raw/master/pictures/chimera.svg)
 
 **Example 2**: the same Chimera, but with labels.
 
@@ -83,7 +83,7 @@ dwavetikz chimera 2 --output chimera.tex
 dwavetikz chimera 2 --output chimera2.tex --with-labels
 ```
 
-![chimera](pictures/chimera2.svg)
+![chimera](https://github.com/dexter2206/dwave-tikz/raw/master/pictures/chimera2.svg)
 
 
 **Example 3**: the same Chimera, with labels, and after changing styles.
@@ -107,7 +107,7 @@ The styles were modified as follows (relevant part of `chimera3.tex`):
     ]
 ```
 
-![chimera](pictures/chimera3.svg)
+![chimera](https://github.com/dexter2206/dwave-tikz/raw/master/pictures/chimera3.svg)
 
 **Example 4**: Chimera with 2 rows, 3 columns and nonstandard shore size of 8 (unit cells of 
 such Chimera are ports of the Zephyr topology). It also uses larger scaling of coordinates to 
@@ -117,7 +117,7 @@ spread out nodes further away from each other (otherwise the nodes would overlap
 dwavetikz chimera 2 -n 3 -t 8 --output chimera4.tex --scale 40 --compile
 ```
 
-![chimera](pictures/chimera4.svg)
+![chimera](https://github.com/dexter2206/dwave-tikz/raw/master/pictures/chimera4.svg)
 
 **Example 5**: The P3 Pegasus using the default L-layout for Chimera unit cells.
 
@@ -125,7 +125,7 @@ dwavetikz chimera 2 -n 3 -t 8 --output chimera4.tex --scale 40 --compile
 dwavetikz pegasus 3 --output pegasus.tex
 ```
 
-![pegasus](pictures/pegasus.svg)
+![pegasus](https://github.com/dexter2206/dwave-tikz/raw/master/pictures/pegasus.svg)
 
 **Example 6**: The P3 Pegasus using the cross layout for Chimera unit cells.
 
@@ -133,7 +133,7 @@ dwavetikz pegasus 3 --output pegasus.tex
 dwavetikz pegasus 3 --cross --output pegasus2.tex
 ```
 
-![pegasus](pictures/pegasus2.svg)
+![pegasus](https://github.com/dexter2206/dwave-tikz/raw/master/pictures/pegasus2.svg)
 
 **Example 7**: The Z3 Zephyr graph.
 
@@ -141,4 +141,4 @@ dwavetikz pegasus 3 --cross --output pegasus2.tex
 dwavetikz zephyr 3 --cross --output zephyr.tex
 ```
 
-![zephyr](pictures/zephyr.svg)
+![zephyr](https://github.com/dexter2206/dwave-tikz/raw/master/pictures/zephyr.svg)
